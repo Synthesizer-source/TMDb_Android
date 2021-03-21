@@ -25,7 +25,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/bottom_nav_background"
         app:menu="@menu/bottom_menu"
+        app:itemIconTint="@drawable/bottom_nav_selector"
+        app:itemTextColor="@drawable/bottom_nav_selector"
         >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
