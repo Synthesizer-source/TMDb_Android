@@ -1,7 +1,5 @@
 package com.synthesizer.tmdbapp.view;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +14,13 @@ import android.view.ViewGroup;
 
 import com.synthesizer.tmdbapp.R;
 import com.synthesizer.tmdbapp.adapter.TempAdapter;
+import com.synthesizer.tmdbapp.service.response.GenreList;
+import com.synthesizer.tmdbapp.service.BaseAPI;
+import com.synthesizer.tmdbapp.service.MovieService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -32,6 +37,8 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recyclerViewHome);
+
+        getData();
         return root;
     }
 
@@ -45,6 +52,23 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         tempAdapter = new TempAdapter();
         recyclerView.setAdapter(tempAdapter);
+    }
+
+    synchronized private void getData(){
+        MovieService movieService = BaseAPI.getAPI().create(MovieService.class);
+        movieService.getGenres().enqueue(new Callback<GenreList>() {
+            @Override
+            public void onResponse(Call<GenreList> call, Response<GenreList> response) {
+                if(response.isSuccessful())
+                    System.out.println(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<GenreList> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+
+        });
     }
 
 }
