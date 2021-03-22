@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bottom_nav_background">#202020</color>
     <color name="bottom_nav_selected_color">#B18809</color>
+    <color name="background">#343434</color>
 
 </resources>

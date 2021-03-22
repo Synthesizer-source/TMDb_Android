@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeFragment"
-    android:background="@color/teal_200"/>
+    android:background="@color/background"
+    tools:context=".view.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutHome_SearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextHome_Search"
+            android:layout_width="0dp"
+            android:layout_weight="0.85"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/darker_gray"
+            android:hint="Search movie"
+            android:textColorHint="#54C9C9C9"
+            />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:background="@color/bottom_nav_background"
+            android:src="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:background="@color/bottom_nav_background"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:translationZ="-20dp"
+        app:tabSelectedTextColor="@color/bottom_nav_selected_color"
+        app:tabIndicatorColor="@color/bottom_nav_selected_color"
+        app:tabTextColor="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutHome_SearchBar">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="upcoming" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="popular" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="top rated" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingStart="2dp"
+        android:layout_marginTop="100dp"
+        android:paddingEnd="2dp"
+        android:translationZ="-30dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
