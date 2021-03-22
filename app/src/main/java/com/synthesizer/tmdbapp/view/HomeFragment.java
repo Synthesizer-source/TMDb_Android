@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.synthesizer.tmdbapp.R;
-import com.synthesizer.tmdbapp.adapter.TempAdapter;
+import com.synthesizer.tmdbapp.adapter.MovieListAdapter;
+import com.synthesizer.tmdbapp.model.Movie;
 import com.synthesizer.tmdbapp.service.response.GenreList;
 import com.synthesizer.tmdbapp.service.BaseAPI;
 import com.synthesizer.tmdbapp.service.MovieService;
+import com.synthesizer.tmdbapp.viewmodel.HomeViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +31,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel mViewModel;
     private RecyclerView recyclerView;
-    private TempAdapter tempAdapter;
+    private MovieListAdapter movieListAdapter;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -37,37 +42,28 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recyclerViewHome);
-
-        getData();
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         // TODO: Use the ViewModel
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        tempAdapter = new TempAdapter();
-        recyclerView.setAdapter(tempAdapter);
+        movieListAdapter = new MovieListAdapter();
+        recyclerView.setAdapter(movieListAdapter);
+        observe();
     }
 
-    synchronized private void getData(){
-        MovieService movieService = BaseAPI.getAPI().create(MovieService.class);
-        movieService.getGenres().enqueue(new Callback<GenreList>() {
+    public void observe(){
+        mViewModel.getMoviesPagedList().observe(getViewLifecycleOwner(), new Observer<PagedList<Movie>>() {
             @Override
-            public void onResponse(Call<GenreList> call, Response<GenreList> response) {
-                if(response.isSuccessful())
-                    System.out.println(response.body());
+            public void onChanged(PagedList<Movie> movies) {
+                movieListAdapter.submitList(movies);
             }
-
-            @Override
-            public void onFailure(Call<GenreList> call, Throwable t) {
-                System.out.println(t.getMessage());
-            }
-
         });
     }
 

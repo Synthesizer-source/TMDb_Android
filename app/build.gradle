@@ -56,7 +56,12 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
+    // Paging Library
+    implementation 'androidx.paging:paging-runtime:2.1.2'
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }
 
 def getApiKey(){
