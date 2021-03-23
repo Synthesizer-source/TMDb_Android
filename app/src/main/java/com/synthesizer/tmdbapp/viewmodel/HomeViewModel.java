@@ -7,6 +7,8 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.synthesizer.tmdbapp.datasource.MovieDataSourceFactory;
+import com.synthesizer.tmdbapp.datasource.SearchDataSourceParam;
+import com.synthesizer.tmdbapp.datasource.TypeDataSourceParam;
 import com.synthesizer.tmdbapp.model.Movie;
 
 import java.util.concurrent.Executors;
@@ -15,6 +17,7 @@ public class HomeViewModel extends ViewModel {
 
     private LiveData<PagedList<Movie>> moviesPagedList;
     private final MovieDataSourceFactory factory;
+    private final String[] types = {"upcoming","popular","top_rated"};
 
     public HomeViewModel(){
         factory = new MovieDataSourceFactory();
@@ -29,10 +32,27 @@ public class HomeViewModel extends ViewModel {
                 .setFetchExecutor(Executors.newFixedThreadPool(5))
                 .build();
 
+        this.changeType(0);
 
     }
 
     public LiveData<PagedList<Movie>> getMoviesPagedList() {
         return moviesPagedList;
+    }
+
+    public void changeType(int index){
+        try{
+            factory.updateType(new TypeDataSourceParam(types[index]));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void searchMovies(String query){
+        try{
+            factory.searchMovies(new SearchDataSourceParam(query));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
