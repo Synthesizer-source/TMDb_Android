@@ -1,4 +1,4 @@
-package com.synthesizer.tmdbapp.view;
+package com.synthesizer.tmdbapp.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.synthesizer.tmdbapp.R;
+import com.synthesizer.tmdbapp.viewmodel.SecondViewModel;
 
 public class SecondFragment extends Fragment {
 
