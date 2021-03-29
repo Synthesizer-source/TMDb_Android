@@ -1,6 +1,7 @@
 package com.synthesizer.tmdbapp.service;
 
 import com.synthesizer.tmdbapp.service.response.GenreList;
+import com.synthesizer.tmdbapp.service.response.MovieDetail;
 import com.synthesizer.tmdbapp.service.response.MovieList;
 
 import retrofit2.Call;
@@ -19,4 +20,6 @@ public interface MovieService {
     @GET("search/movie")
     Call<MovieList> getMoviesBySearch(@Query("query") String query, @Query("page") Integer page);
 
+    @GET("movie/{movie_id}")
+    Call<MovieDetail> getMovieByID(@Path("movie_id") int movieID);
 }
