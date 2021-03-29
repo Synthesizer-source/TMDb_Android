@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
@@ -18,6 +19,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import com.bumptech.glide.Glide;
 import com.synthesizer.tmdbapp.R;
 import com.synthesizer.tmdbapp.model.Movie;
+import com.synthesizer.tmdbapp.view.HomeFragment;
+import com.synthesizer.tmdbapp.view.HomeFragmentDirections;
 
 public class MovieListAdapter extends PagedListAdapter<Movie, MovieListAdapter.MovieViewHolder> {
 
@@ -65,6 +68,7 @@ public class MovieListAdapter extends PagedListAdapter<Movie, MovieListAdapter.M
             progressBar = new CircularProgressDrawable(viewHolderContext);
             progressBar.setStyle(CircularProgressDrawable.DEFAULT);
             progressBar.start();
+
         }
 
         public void bind(Movie movie){
@@ -74,6 +78,14 @@ public class MovieListAdapter extends PagedListAdapter<Movie, MovieListAdapter.M
                         .placeholder(progressBar)
                         .into(imageView);
             }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view)
+                            .navigate(HomeFragmentDirections.actionNavigationHomeToNavigationMovieDetail(movie.getId()));
+                }
+            });
         }
     }
 }
