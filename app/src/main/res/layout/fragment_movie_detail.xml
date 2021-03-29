@@ -23,8 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-
                 <ImageView
                     android:id="@+id/imageViewMovieDetail_Backdrop"
                     android:layout_width="match_parent"
@@ -55,9 +53,8 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Movie Name" />
+                    android:textSize="@dimen/title_text_size"
+                    android:layout_gravity="center_horizontal" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayoutMovieDetails"
@@ -97,9 +94,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="top"
-                    android:text="Overview"
-                    android:textColor="#E91E63"
-                    android:textSize="24sp" />
+                    android:text="@string/overview"
+                    android:textColor="@color/pink"
+                    android:textSize="@dimen/label_text_size" />
 
                 <View
                     android:id="@+id/viewMovieDetail_DividerOverview"
@@ -107,13 +104,13 @@
                     android:layout_height="1dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:background="#E91E63" />
+                    android:background="@color/pink" />
             </LinearLayout>
             <TextView
                 android:id="@+id/textViewMovieDetail_Overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/normal_text_size"
                 android:textColor="@color/white"
                 android:padding="5dp"/>
             <TextView
@@ -122,12 +119,12 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:autoLink="web"
-                android:textSize="16sp"
+                android:textSize="@dimen/normal_text_size"
                 android:drawableLeft="@android:drawable/ic_menu_directions"
                 android:textColor="#FFC107"
                 android:textStyle="italic"
                 android:gravity="center_vertical"
-                android:text="Visit on IMDB"
+                android:text="@string/visit_imdb"
                 android:linksClickable="true"/>
 
         </LinearLayout>

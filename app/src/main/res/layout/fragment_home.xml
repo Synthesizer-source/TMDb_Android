@@ -44,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:translationZ="-20dp"
-        app:tabSelectedTextColor="@color/bottom_nav_selected_color"
-        app:tabIndicatorColor="@color/bottom_nav_selected_color"
+        app:tabSelectedTextColor="@color/dark_yellow"
+        app:tabIndicatorColor="@color/dark_yellow"
         app:tabTextColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutHome_SearchBar">
